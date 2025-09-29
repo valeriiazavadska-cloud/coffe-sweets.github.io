@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee & Sweets by Valeria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --pastel-pink: #f8d7da;
+            --pastel-blue: #d1ecf1;
+            --pastel-green: #d4edda;
+            --pastel-cream: #fff3cd;
+            --pastel-purple: #e2d9f3;
+            --text-dark: #495057;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--pastel-cream) 0%, var(--pastel-blue) 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Бічна навігація */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 2rem 1rem;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            padding: 0.75rem 1rem;
+            display: block;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: var(--pastel-pink);
+            transform: translateX(5px);
+        }
+
+        /* Основний контент */
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            margin-bottom: 2rem;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        /* Секція герой */
+        .hero {
+            background: linear-gradient(135deg, var(--pastel-purple) 0%, var(--pastel-blue) 100%);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Меню продуктів */
+        .menu-category {
+            margin-bottom: 3rem;
+        }
+
+        .menu-category h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--pastel-pink);
+            padding-bottom: 0.5rem;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .menu-item {
+            background: var(--pastel-cream);
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-info h4 {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-info .price {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: var(--pastel-blue);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: var(--pastel-purple);
+            transform: scale(1.1);
+        }
+
+        .quantity-display {
+            min-width: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .item-total {
+            min-width: 80px;
+            text-align: right;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        /* Калькулятор */
+        .calculator {
+            background: var(--pastel-green);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .total-section {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 10px;
+        }
+
+        /* Галерея */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            height: 200px;
+            background: var(--pastel-cream);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Контакти */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: var(--pastel-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--text-dark);
+            color: var(--white);
+            margin-top: 2rem;
+            border-radius: 10px;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .nav-links {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Бічна навігація -->
+    <nav class="sidebar">
+        <div class="logo">
+            <h1>Coffee & Sweets</h1>
+            <p>by Valeria</p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Головна</a></li>
+            <li><a href="#about">Про нас</a></li>
+            <li><a href="#menu">Меню</a></li>
+            <li><a href="#gallery">Галерея</a></li>
+            <li><a href="#contacts">Контакти</a></li>
+        </ul>
+    </nav>
+
+    <!-- Основний контент -->
+    <main class="main-content">
+        <!-- Секція Герой -->
+        <section id="home" class="hero">
+            <h1>Ласкаво просимо до Coffee & Sweets</h2>
+            <p>Де кожна кава - мистецтво, а кожен десерт - насолода</p>
+        </section>
+
+        <!-- Секція Про нас -->
+        <section id="about">
+            <h2>Про нас</h2>
+            <div class="about-content">
+                <p>Наша кав'ярня "Coffee & Sweets" була заснована у 2020 році з мрії створити особливе місце, де поєднуються найкращі традиції кавоваріння та кондитерського мистецтва.</p>
+                <br>
+                <p>Ми віримо, що ідеальна чашка кави має бути не лише смачною, але й надихати. Саме тому ми ретельно відбираємо кращі сорти кави з усього світу та створюємо унікальні десерти, які стають справжнім відкриттям для наших гостей.</p>
+                <br>
+                <p>Наша філософія - це поєднання якості, креативності та затишну атмосферу, де кожен відчуває себе особливим.</p>
+            </div>
+        </section>
+
+        <!-- Секція Меню з калькулятором -->
+        <section id="menu">
+            <h2>Наше Меню</h2>
+            
+            <!-- Гарячі напої -->
+            <div class="menu-category">
+                <h3>☕ Гарячі напої</h3>
+                <div class="menu-items">
+                    <div class="menu-item" data-category="hot-drinks" data-price="45">
+                        <div class="item-info">
+                            <h4>Еспресо</h4>
+                            <span class="price">45 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                    <div class="menu-item" data-category="hot-drinks" data-price="55">
+                        <div class="item-info">
+                            <h4>Американо</h4>
+                            <span class="price">55 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                    <div class="menu-item" data-category="hot-drinks" data-price="65">
+                        <div class="item-info">
+                            <h4>Капучино</h4>
+                            <span class="price">65 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                    <div class="menu-item" data-category="hot-drinks" data-price="70">
+                        <div class="item-info">
+                            <h4>Лате</h4>
+                            <span class="price">70 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                    <div class="menu-item" data-category="hot-drinks" data-price="60">
+                        <div class="item-info">
+                            <h4>Гарячий шоколад</h4>
+                            <span class="price">60 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Холодні напої -->
+            <div class="menu-category">
+                <h3>🥤 Холодні напої</h3>
+                <div class="menu-items">
+                    <div class="menu-item" data-category="cold-drinks" data-price="85">
+                        <div class="item-info">
+                            <h4>Фрапучіно</h4>
+                            <span class="price">85 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                    <div class="menu-item" data-category="cold-drinks" data-price="75">
+                        <div class="item-info">
+                            <h4>Айс Лате</h4>
+                            <span class="price">75 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                    <div class="menu-item" data-category="cold-drinks" data-price="65">
+                        <div class="item-info">
+                            <h4>Лимонад</h4>
+                            <span class="price">65 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                    <div class="menu-item" data-category="cold-drinks" data-price="55">
+                        <div class="item-info">
+                            <h4>Холодний чай</h4>
+                            <span class="price">55 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Десерти -->
+            <div class="menu-category">
+                <h3>🍰 Десерти</h3>
+                <div class="menu-items">
+                    <div class="menu-item" data-category="desserts" data-price="95">
+                        <div class="item-info">
+                            <h4>Тірамісу</h4>
+                            <span class="price">95 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                    <div class="menu-item" data-category="desserts" data-price="85">
+                        <div class="item-info">
+                            <h4>Наполеон</h4>
+                            <span class="price">85 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                    <div class="menu-item" data-category="desserts" data-price="45">
+                        <div class="item-info">
+                            <h4>Еклер</h4>
+                            <span class="price">45 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                    <div class="menu-item" data-category="desserts" data-price="50">
+                        <div class="item-info">
+                            <h4>Мафін</h4>
+                            <span class="price">50 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                    <div class="menu-item" data-category="desserts" data-price="90">
+                        <div class="item-info">
+                            <h4>Чізкейк</h4>
+                            <span class="price">90 грн</span>
+                        </div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn minus">-</button>
+                            <span class="quantity-display">0</span>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="item-total">0 грн</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Калькулятор замовлення -->
+            <div class="calculator">
+                <h3>🛒 Калькулятор замовлення</h3>
+                <div class="total-section">
+                    Загальна сума: <span id="total-amount">0</span> грн
+                </div>
+            </div>
+        </section>
+
+        <!-- Галерея -->
+        <section id="gallery">
+            <h2>Галерея</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1542181961-9590d0c79dab?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Кава">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Десерти">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Інтер'єр кав'ярні">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Кавоварка">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Свіжа випічка">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Приготування кави">
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакти -->
+        <section id="contacts">
+            <h2>Контакти</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>📍 Адреса</h3>
+                    <p>вул. Університетська, 15<br>м. Київ, 01001</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📞 Телефон</h3>
+                    <p>+38 (044) 123-45-67</p>
+                </div>
+                <div class="contact-item">
+                    <h3>🕒 Години роботи</h3>
+                    <p>Понеділок - Неділя<br>8:00 - 22:00</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📧 Email</h3>
+                    <p>info@coffeesweets.ua</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Футер -->
+        <footer>
+            <p>Сайт розроблено студентом Валерією Завадською, група ФЕМП 5-3з</p>
+            <p>Навчальний проект для здачі іспиту</p>
+        </footer>
+    </main>
+
+    <script>
+        // Плавна прокрутка для навігації
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Калькулятор замовлення
+        document.querySelectorAll('.menu-item').forEach(item => {
+            const minusBtn = item.querySelector('.minus');
+            const plusBtn = item.querySelector('.plus');
+            const quantityDisplay = item.querySelector('.quantity-display');
+            const itemTotal = item.querySelector('.item-total');
+            const price = parseInt(item.getAttribute('data-price'));
+            
+            let quantity = 0;
+
+            function updateDisplay() {
+                quantityDisplay.textContent = quantity;
+                const total = quantity * price;
+                itemTotal.textContent = total + ' грн';
+                updateTotal();
+            }
+
+            minusBtn.addEventListener('click', () => {
+                if (quantity > 0) {
+                    quantity--;
+                    updateDisplay();
+                }
+            });
+
+            plusBtn.addEventListener('click', () => {
+                quantity++;
+                updateDisplay();
+            });
+
+            // Ініціалізація
+            updateDisplay();
+        });
+
+        function updateTotal() {
+            let total = 0;
+            document.querySelectorAll('.menu-item').forEach(item => {
+                const quantity = parseInt(item.querySelector('.quantity-display').textContent);
+                const price = parseInt(item.getAttribute('data-price'));
+                total += quantity * price;
+            });
+            document.getElementById('total-amount').textContent = total;
+        }
+    </script>
+</body>
+</html>
